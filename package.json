@@ -1,0 +1,16 @@
+{
+  "name": "xistoclone",
+  "version": "1.0.0",
+  "description": "bot to auto post in ignboards",
+  "main": "index.js",
+  "author": "mellon_collie",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio-select": "^1.4.0",
+    "xen-node": "^1.0.1"
+  },
+  "scripts": {
+    "start": "index.js"
+  }
+}
