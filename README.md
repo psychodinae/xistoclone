@@ -1,2 +1,2 @@
 # xistoclone
-bot to auto post in ignboards based on thread titles
+bot para auto post no forum ignboards, baseadoon nos titulos dos threads
