@@ -10,14 +10,19 @@ const BOARD_URI = process.env.BOARD_URI; // '/forums/vale-tudo.80331/'
 const GIST_TOKEN = process.env.GIST_TOKEN; // ex: '9872938172983719283719283719283773'
 const FILE_ID = process.env.FILE_ID; // ex: '87a6sd87a6sd86c6c8a68768a7c6868'
 const FILE_NAME = process.env.FILE_NAME; // ex: 'xistoclone'
-const COOKIE =  JSON.parse(process.env.COOKIE); // ex ["xf_user=45345dfgfdsf4r4s4r-gdfgdfgdfg_hzdsgr434gdfhj3j3hk4j3h4k;"]
+const COOKIE = JSON.parse(process.env.COOKIE); // ex ["xf_user=45345dfgfdsf4r4s4r-gdfgdfgdfg_hzdsgr434gdfhj3j3hk4j3h4k;"]
 
 const dicionario = [
   {
-    modo: 'qualquer',
+    modo: "qualquer",
     excluir: [],
-    chave: ['qual o lvl', 'qual o level'],
-    resposta: ["full equip lvl 20 no max", "gostosa", "lvl 100", 'Comeria às quintas'],
+    chave: ["qual o lvl", "qual o level"],
+    resposta: [
+      "full equip lvl 20 no max",
+      "gostosa",
+      "lvl 100",
+      "Comeria às quintas",
+    ],
   },
   {
     modo: "qualquer",
@@ -40,31 +45,47 @@ const dicionario = [
   {
     modo: "todas",
     excluir: [],
-    chave: ['concurso'],
+    chave: ["concurso"],
     resposta: ["@BCFF11"],
   },
   {
-    modo: 'qualquer',
+    modo: "qualquer",
     excluir: [],
-    chave: ["entra aqui", 'entre aqui'],
+    chave: ["entra aqui", "entre aqui"],
     resposta: ["entrei, e agora?"],
   },
   {
     modo: "todas",
     excluir: [],
-    chave: ['panela'],
-    resposta: ['panela é mono', 'não participo de panelas, lamento.', 'panela boa'],
+    chave: ["panela"],
+    resposta: [
+      "panela é mono",
+      "não participo de panelas, lamento.",
+      "panela boa",
+    ],
   },
   {
     modo: "todas",
     excluir: [],
-    chave: ['bom dia'],
-    resposta: ['Bom dia meu confederado!', 'Bom dia meu consagrado!', 'Bom dia meu capataz.'],
+    chave: ["bom dia"],
+    resposta: [
+      "Bom dia meu confederado!",
+      "Bom dia meu consagrado!",
+      "Bom dia meu capataz.",
+    ],
   },
- 
+  {
+    modo: "qualquer",
+    excluir: [],
+    chave: ["dá pra viver", "dá para viver", "você viveria com"],
+    resposta: [
+      "não da nem para o sucrilhos",
+      "não dá não",
+    ],
+  },
 ];
 
-const req = new XenNode(URL)
+const req = new XenNode(URL);
 const giz = new GistMan(GIST_TOKEN);
 
 function randomChoice(data) {
@@ -75,7 +96,7 @@ function postingDeleyed(data) {
   setTimeout(main, data.length * timeout + interval); // call main recursively with delays
   data.forEach((thread, idx) => {
     setTimeout(() => {
-    console.log('post: ',thread)
+      console.log("post: ", thread);
       req
         .checkLogin(COOKIE)
         .then(() => req.post(thread[2], thread[0]))
@@ -109,16 +130,19 @@ function genResponse(data) {
 }
 
 function filterThreads(data) {
-  giz.read(FILE_ID, FILE_NAME)
+  giz
+    .read(FILE_ID, FILE_NAME)
     .then((gResp) => {
-     gResp = BigInt(gResp);
-     let fThreads = data.filter((fil) => BigInt(fil[0]) > gResp);
+      gResp = BigInt(gResp);
+      let fThreads = data.filter((fil) => BigInt(fil[0]) > gResp);
       if (fThreads.length > 0) {
-       giz.update(FILE_ID, FILE_NAME, data[0][0]).catch(() => console.log("gistManUpdateError"));
+        giz
+          .update(FILE_ID, FILE_NAME, data[0][0])
+          .catch(() => console.log("gistManUpdateError"));
         genResponse(fThreads);
       } else {
-      //console.log('nothing new')
-       setTimeout(main, interval); // if not have new tweets call main recursively
+        //console.log('nothing new')
+        setTimeout(main, interval); // if not have new tweets call main recursively
       }
     })
     .catch((error) => console.log("gistManReadError"));
@@ -126,7 +150,7 @@ function filterThreads(data) {
 
 function main() {
   axios
-    .get(URL+BOARD_URI)
+    .get(URL + BOARD_URI)
     .then((resp) => {
       let $ = cheerio.load(resp.data);
       let allThreads = $(".structItem-title")
@@ -145,5 +169,5 @@ function main() {
     .catch((error) => console.log(error));
 }
 
-console.log("rodando...")
+console.log("rodando...");
 main();
