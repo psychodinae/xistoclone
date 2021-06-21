@@ -75,12 +75,34 @@ const dicionario = [
     ],
   },
   {
+    modo: "todas",
+    excluir: [],
+    chave: ["essa"],
+    resposta: [
+      "da hora",
+      "Eita!",
+      "meio escrota",
+    ],
+  },
+  {
+    modo:  "todas"",
+    excluir: [],
+    chave: ["esse"],
+    resposta: [
+      "tbm acho",
+      "sera?",
+      "discordo.",
+    ],
+  },
+  {
     modo: "qualquer",
     excluir: [],
-    chave: ["dá pra viver", "dá para viver", "você viveria com"],
+    chave: ["URGENTE", "ATENÇÃO", "denuncia", "Denúncia"],
     resposta: [
-      "não da nem para o sucrilhos",
-      "não dá não",
+      "Mantenha-nos informados",
+      "[IMG]https://i.ibb.co/ccCGbFN/n-o-pode-ser.jpg[/IMG]",
+      "ok anotado",
+      "e daí?",
     ],
   },
 ];
