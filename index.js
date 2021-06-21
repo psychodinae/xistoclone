@@ -85,7 +85,7 @@ const dicionario = [
     ],
   },
   {
-    modo:  "todas"",
+    modo:  "todas",
     excluir: [],
     chave: ["esse"],
     resposta: [
