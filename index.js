@@ -75,26 +75,6 @@ const dicionario = [
     ],
   },
   {
-    modo: "todas",
-    excluir: [],
-    chave: ["essa"],
-    resposta: [
-      "da hora",
-      "Eita!",
-      "meio escrota",
-    ],
-  },
-  {
-    modo:  "todas",
-    excluir: [],
-    chave: ["esse"],
-    resposta: [
-      "tbm acho",
-      "sera?",
-      "discordo.",
-    ],
-  },
-  {
     modo: "qualquer",
     excluir: [],
     chave: ["URGENTE", "ATENÇÃO", "denuncia", "Denúncia"],
